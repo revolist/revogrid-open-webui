@@ -123,7 +123,7 @@ from open_webui.utils.misc import (
 )
 from open_webui.utils.utils import get_admin_user, get_verified_user
 
-from langchain.text_splitter import RecursiveCharacterTextSplitter, TokenTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter, TokenTextSplitter, Language
 from langchain_core.documents import Document
 
 
@@ -773,11 +773,33 @@ def save_docs_to_vector_db(
 
     if split:
         if app.state.config.TEXT_SPLITTER in ["", "character"]:
-            text_splitter = RecursiveCharacterTextSplitter(
-                chunk_size=app.state.config.CHUNK_SIZE,
-                chunk_overlap=app.state.config.CHUNK_OVERLAP,
-                add_start_index=True,
-            )
+            if  metadata.get("name", "").endswith(".ts"):
+                text_splitter = RecursiveCharacterTextSplitter.from_language(
+                    language=Language.TS,
+                    chunk_size=app.state.config.CHUNK_SIZE,
+                    chunk_overlap=app.state.config.CHUNK_OVERLAP,
+                    add_start_index=True,
+                )
+            elif metadata.get("name", "").endswith(".js"):
+                text_splitter = RecursiveCharacterTextSplitter.from_language(
+                    language=Language.JS,
+                    chunk_size=app.state.config.CHUNK_SIZE,
+                    chunk_overlap=app.state.config.CHUNK_OVERLAP,
+                    add_start_index=True,
+                )
+            elif metadata.get("name", "").endswith(".md"):
+                text_splitter = RecursiveCharacterTextSplitter.from_language(
+                    language=Language.MARKDOWN,
+                    chunk_size=app.state.config.CHUNK_SIZE,
+                    chunk_overlap=app.state.config.CHUNK_OVERLAP,
+                    add_start_index=True,
+                )
+            else:
+                text_splitter = RecursiveCharacterTextSplitter(
+                    chunk_size=app.state.config.CHUNK_SIZE,
+                    chunk_overlap=app.state.config.CHUNK_OVERLAP,
+                    add_start_index=True,
+                )
         elif app.state.config.TEXT_SPLITTER == "token":
             log.info(
                 f"Using token text splitter: {app.state.config.TIKTOKEN_ENCODING_NAME}"
