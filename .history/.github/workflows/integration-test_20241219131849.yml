@@ -3,8 +3,8 @@ name: Integration Test
 on:
   push:
     branches:
-      - revo
-      # - dev
+      - main
+      - dev
   pull_request:
     branches:
       - main

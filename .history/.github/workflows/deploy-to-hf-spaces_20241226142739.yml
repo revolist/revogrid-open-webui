@@ -1,8 +1,8 @@
 name: Deploy to HuggingFace Spaces
 
 on:
-  # push:
-    # branches:
+  push:
+    branches:
       # - dev
       # - main
   workflow_dispatch:

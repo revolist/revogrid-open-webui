@@ -3,8 +3,8 @@ name: Python CI
 on:
   push:
     branches:
-      # - main
-      - revo
+      - main
+      - dev
   pull_request:
     branches:
       - main

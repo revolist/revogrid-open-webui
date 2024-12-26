@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - revo # or whatever branch you want to use
+      - dev # or whatever branch you want to use
 
 jobs:
   release:
