@@ -251,7 +251,7 @@
 				'openai',
 				'users'
 			]
-		},
+		}
 	];
 
 	let search = '';
