@@ -1,10 +1,10 @@
 name: Integration Test
 
 on:
-  push:
-    branches:
-      - revo
-      # - dev
+  # push:
+  #   branches:
+  #     - revo
+  #     - dev
   pull_request:
     branches:
       - main
